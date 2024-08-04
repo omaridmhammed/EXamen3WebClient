@@ -2,17 +2,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.querySelector('.contact-form form');
 
     contactForm.addEventListener('submit', function(event) {
-        // Prevoir le form de soumission
+        // Prévenir la soumission du formulaire
         event.preventDefault();
 
-        // 
+        // Récupérer les valeurs des champs
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const message = document.getElementById('message').value.trim();
 
-        // validation
+        // Initialiser la validation
         let isValid = true;
 
+        // Validation du nom
         if (name === "") {
             showError('name', 'Name is required');
             isValid = false;
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hideError('name');
         }
 
+        // Validation de l'email
         if (email === "") {
             showError('email', 'Email is required');
             isValid = false;
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hideError('email');
         }
 
+        // Validation du message
         if (message === "") {
             showError('message', 'Message is required');
             isValid = false;
@@ -37,9 +40,12 @@ document.addEventListener('DOMContentLoaded', function() {
             hideError('message');
         }
 
-        // If the form is valid, you can submit it or send data via AJAX
+        // Soumettre le formulaire si toutes les validations passent
         if (isValid) {
-            contactForm.submit(); // Uncomment to enable actual form submission
+            console.log("Form submitted successfully");
+            contactForm.submit(); // Décommenter pour activer la soumission réelle du formulaire
+        } else {
+            console.log("Form validation failed");
         }
     });
 
@@ -53,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             inputElement.parentNode.insertBefore(errorElement, inputElement.nextSibling);
         }
         errorElement.textContent = message;
+        errorElement.style.display = 'block'; // S'assurer que l'erreur est visible
     }
 
     function hideError(inputId) {
